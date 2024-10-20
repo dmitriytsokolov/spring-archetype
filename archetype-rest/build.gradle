@@ -1,0 +1,26 @@
+plugins {
+    alias libs.plugins.spring.boot
+    alias libs.plugins.spring.dependency.management
+}
+
+bootJar {
+    enabled = false
+}
+
+dependencies {
+    implementation project(':archetype-domain')
+    implementation project(':archetype-logic')
+    implementation libs.json.patch
+    implementation libs.spring.boot
+    implementation libs.spring.boot.web
+    implementation libs.spring.boot.security
+    implementation libs.spring.boot.validation
+    implementation libs.spring.boot.openapi
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+    testImplementation libs.spring.boot.test
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

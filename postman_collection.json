@@ -1,0 +1,332 @@
+{
+  "info": {
+    "_postman_id": "f32d592e-4ee6-4088-a265-46d4be526b15",
+    "name": "Spring Archetype",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "3225208",
+    "_collection_link": "https://galactic-firefly-437749.postman.co/workspace/Education~17d9c1ce-15e9-45d0-9e7c-aef0085e511a/collection/3225208-f32d592e-4ee6-4088-a265-46d4be526b15?action=share&source=collection_link&creator=3225208"
+  },
+  "item": [
+    {
+      "name": "Get Token",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "client_id",
+              "value": "item-client",
+              "type": "text"
+            },
+            {
+              "key": "username",
+              "value": "test_user_read",
+              "type": "text"
+            },
+            {
+              "key": "password",
+              "value": "test_user_read_pswd",
+              "type": "text"
+            },
+            {
+              "key": "grant_type",
+              "value": "password",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{KEYCLOAK_URL}}/realms/test/protocol/openid-connect/token",
+          "host": [
+            "{{KEYCLOAK_URL}}"
+          ],
+          "path": [
+            "realms",
+            "test",
+            "protocol",
+            "openid-connect",
+            "token"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Item",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{TOKEN}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Item 1\",\n  \"length\": 10,\n  \"height\": 20,\n  \"weight\": 5,\n  \"manufacturedDate\": \"1697150382\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/spring-archetype/v1/items",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "spring-archetype",
+            "v1",
+            "items"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Items",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{TOKEN}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/spring-archetype/v1/items",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "spring-archetype",
+            "v1",
+            "items"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Item",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{TOKEN}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/spring-archetype/v1/items/c398315c-a129-4ef8-b609-3fa18bdce6d8",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "spring-archetype",
+            "v1",
+            "items",
+            "c398315c-a129-4ef8-b609-3fa18bdce6d8"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Replace Item",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{TOKEN}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"title\": \"Item 11\",\n    \"length\": 10,\n    \"height\": 20,\n    \"weight\": 5,\n    \"manufacturedDate\": \"2023-10-12T22:39:42Z\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/spring-archetype/v1/items/452b334a-0115-4ce7-91c0-d21c71cfcbcf",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "spring-archetype",
+            "v1",
+            "items",
+            "452b334a-0115-4ce7-91c0-d21c71cfcbcf"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Patch Item",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{TOKEN}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Item 112\",\n  \"length\": null,\n  \"manufacturedDate\": null\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{BASE_URL}}/spring-archetype/v1/items/452b334a-0115-4ce7-91c0-d21c71cfcbcf",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "spring-archetype",
+            "v1",
+            "items",
+            "452b334a-0115-4ce7-91c0-d21c71cfcbcf"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Item",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{TOKEN}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/spring-archetype/v1/items/bb025f3a-bc9e-4229-9cd7-3fd6d1efd10a",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "spring-archetype",
+            "v1",
+            "items",
+            "bb025f3a-bc9e-4229-9cd7-3fd6d1efd10a"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "var keycloakHost = pm.variables.get(\"KEYCLOAK_URL\") + \"/realms/test/protocol/openid-connect/token\";",
+          "const options = {",
+          "  method: 'post',",
+          "  url: keycloakHost,",
+          "  headers: { ",
+          "    'Content-Type': 'application/x-www-form-urlencoded'",
+          "  },",
+          "  body : {",
+          "    mode: 'urlencoded',",
+          "    urlencoded : [",
+          "      { key: 'client_id', value: 'item-client'},",
+          "      { key: 'username', value: 'test_user_write'},",
+          "      { key: 'password', value: 'test_user_write_pswd'},",
+          "      { key: 'grant_type', value: 'password'},",
+          "    ]",
+          "  }",
+          "};",
+          "",
+          "pm.sendRequest(options, function (err, res) {",
+          "    var jsonData = res.json();",
+          "    if (err) {",
+          "        console.log(err);",
+          "    }",
+          "    else {",
+          "        pm.environment.set(\"TOKEN\", jsonData.access_token);",
+          "    }",
+          "});"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "KEYCLOAK_URL",
+      "value": "http://localhost:8180",
+      "type": "string"
+    }
+  ]
+}

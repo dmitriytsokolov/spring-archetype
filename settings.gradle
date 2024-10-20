@@ -1,0 +1,16 @@
+rootProject.name = 'spring-archetype'
+
+include 'archetype-app'
+include 'archetype-db'
+include 'archetype-domain'
+include 'archetype-logic'
+include 'archetype-rest'
+include 'archetype-security'
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            from(files("libs.versions.toml"))
+        }
+    }
+}

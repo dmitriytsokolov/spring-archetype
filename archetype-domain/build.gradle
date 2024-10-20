@@ -1,0 +1,17 @@
+plugins {
+    alias libs.plugins.spring.boot
+    alias libs.plugins.spring.dependency.management
+}
+
+bootJar {
+    enabled = false
+}
+
+dependencies {
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

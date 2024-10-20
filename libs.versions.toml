@@ -1,0 +1,42 @@
+[versions]
+spring-boot = "3.1.3"
+spring-dependency-management = "1.1.3"
+spring-boot-openapi-version = "2.2.0"
+json-patch-version = "1.13"
+spotbugs = "5.0.13"
+spotbugsToolVersion = "4.7.3"
+checkstyleToolVersion = "10.12.4"
+
+java-version = "17"
+group = "com.nixs"
+version = "0.0.1-SNAPSHOT"
+
+[libraries]
+#tooling
+spotbugs = { group = "com.github.spotbugs.snom", name = "spotbugs-gradle-plugin", version.ref = "spotbugs" }
+
+#src
+spring-boot = { group = "org.springframework.boot", name = "spring-boot-starter" }
+spring-boot-web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
+spring-boot-openapi = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version.ref = "spring-boot-openapi-version" }
+spring-boot-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa" }
+spring-boot-security = { group = "org.springframework.boot", name = "spring-boot-starter-security" }
+spring-boot-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator" }
+spring-boot-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
+spring-boot-oauth2-client = { group = "org.springframework.boot", name = "spring-boot-starter-oauth2-client" }
+spring-boot-oauth2-resource-server = { group = "org.springframework.boot", name = "spring-boot-starter-oauth2-resource-server" }
+spring-kafka = { group = "org.springframework.kafka", name = "spring-kafka" }
+lombok = { group = "org.projectlombok", name = "lombok" }
+liquibase = { group = "org.liquibase", name = "liquibase-core" }
+postgresql = { group = "org.postgresql", name = "postgresql" }
+json-patch = { group = "com.github.java-json-tools", name = "json-patch", version.ref = "json-patch-version" }
+
+#test
+spring-security-test = { group = "org.springframework.security", name = "spring-security-test" }
+spring-kafka-test = { group = "org.springframework.kafka", name = "spring-kafka-test" }
+spring-boot-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
+spring-boot-testcontainers = { group = "org.springframework.boot", name = "spring-boot-testcontainers" }
+
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }

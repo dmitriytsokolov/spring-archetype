@@ -1,0 +1,77 @@
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'com.github.spotbugs'
+    apply plugin: 'checkstyle'
+    apply plugin: 'jacoco-report-aggregation'
+    sourceCompatibility = libs.versions.java.version.get()
+    targetCompatibility = libs.versions.java.version.get()
+    group = libs.versions.group.get()
+    version = libs.versions.version.get()
+
+    repositories {
+        mavenCentral()
+    }
+
+    testCodeCoverageReport {
+    }
+    check.dependsOn testCodeCoverageReport
+    test {
+        ignoreFailures = true
+        finalizedBy testCodeCoverageReport // report is always generated after tests run
+        useJUnitPlatform()
+        testLogging {
+            events "passed", "skipped", "failed"
+        }
+    }
+    tasks.named('check') {
+        dependsOn tasks.named('testCodeCoverageReport', JacocoReport)
+    }
+
+    //checkstyle configuration
+    checkstyle {
+        toolVersion = libs.versions.checkstyleToolVersion.get()
+        configFile = project(':').file('config/checkstyle/checkstyle.xml')
+        configProperties = ["suppressionFile": project(':').file('config/checkstyle/suppressions.xml')]
+    }
+    checkstyleMain {
+        source = 'src/main/java'
+    }
+    checkstyleTest {
+        source = 'src/test/java'
+    }
+    tasks.withType(Checkstyle) {
+        reports {
+            xml.required.set(false)
+            html.required.set(false)
+        }
+    }
+
+    //spotbugs configuration
+    spotbugs {
+        toolVersion = libs.versions.spotbugsToolVersion.get()
+        ignoreFailures = false
+        effort = 'max'
+        reportLevel = 'high'
+    }
+    tasks.withType(com.github.spotbugs.snom.SpotBugsTask) {
+        dependsOn 'assemble'
+        reports {
+            html.required.set(true)
+        }
+    }
+}
+
+jar {
+    enabled = false
+}
+
+buildscript {
+    repositories {
+        maven {
+            url = uri("https://plugins.gradle.org/m2/")
+        }
+    }
+    dependencies {
+        classpath(libs.spotbugs)
+    }
+}

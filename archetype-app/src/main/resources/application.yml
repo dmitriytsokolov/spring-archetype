@@ -1,0 +1,58 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:postgres}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+  kafka:
+    bootstrap-servers: ${KAFKA_URL:localhost:9092}
+    consumer:
+      auto-offset-reset: earliest
+      group-id: archetype-app
+      topic:
+        create-item-topic:
+          name: create-item-topic
+    producer:
+      topic:
+        create-item-notification-topic:
+          name: create-item-notification-topic
+    retry:
+      topic:
+        attempts: 5
+        multiplier: 2
+        delay: 1000
+  security:
+    public-endpoints: >
+      /v3/api-docs,
+      /v3/api-docs/**,
+      /swagger-ui/**,
+      /swagger-ui.html,
+      /api-docs.yaml
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: item-client
+            client-secret: CgJCXA0yySCct0RPDD7xXniXTjNYuSwe
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: ${KEYCLOAK_SCHEME:http}://${KEYCLOAK_HOST:localhost:8180}/realms/test
+            user-name-attribute: preferred_username
+      resource-server:
+        jwt:
+          issuer-uri: ${KEYCLOAK_SCHEME:http}://${KEYCLOAK_HOST:localhost:8180}/realms/test
+
+server:
+  servlet:
+    context-path: /spring-archetype
+
+management:
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: '*'

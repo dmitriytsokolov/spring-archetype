@@ -1,0 +1,21 @@
+plugins {
+    alias libs.plugins.spring.boot
+    alias libs.plugins.spring.dependency.management
+}
+
+bootJar {
+    enabled = false
+}
+
+dependencies {
+    implementation project(':archetype-domain')
+    implementation libs.spring.boot
+    implementation libs.spring.boot.data.jpa
+    compileOnly libs.lombok
+    annotationProcessor libs.lombok
+    runtimeOnly libs.postgresql
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
